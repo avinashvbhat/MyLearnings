@@ -1,1 +1,28 @@
 test 123
+
+
+select * from dm_user where user_name like 'tmf_trial_mgr1'
+
+select * from dm_relation_type where relation_name like 'Reference Copy'
+
+select r_object_id, security_model from dm_document where r_object_id='092ddaf3800c1253'
+
+update dm_document objects set security_model='OPEN' where r_object_id='092ddaf3800c1253'
+
+select * from dm_document where a_content_type='pdf' order by r_creation_date 
+
+Select child.object_name, child.r_object_id, child.r_object_id as object_id from dm_sysobject (All) child,
+dm_relation relation where child.r_object_id = relation.child_id and relation.parent_id= ''
+and relation.permanent_link=False 
+
+select r_object_id, is_cross_over from cd_clinical_tmf_doc
+select r_object_id, artifact_name, is_cross_over, r_version_label, r_is_virtual_doc from cd_clinical_tmf_doc(all) where is_cross_over='1'
+
+select * from dm_sysobject a, dm_relation b where a.r_object_id = b.child_id and b.parent_id='092ddaf38006a9a7'  
+
+update cd_clinical_tmf_doc objects set is_cross_over=false where r_object_id='092ddaf38006a9a7'
+
+
+EXECUTE do_method with METHOD='CDFInitializeArtifactMethod', ARGUMENTS='-id 092ddaf38006a9a7 -docbase_name ls50suite2'
+go
+
